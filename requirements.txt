@@ -1,0 +1,12 @@
+faster-whisper==1.0.3      # local speech-to-text
+sounddevice==0.4.7         # mic input / audio playback
+numpy==1.26.4
+pyyaml==6.0.2
+anthropic==0.34.2          # Claude API (the brain)
+mss==9.0.1                 # fast screenshotting
+pygetwindow==0.0.9         # active window title (Windows)
+psutil==6.0.0              # active process info
+pywin32==306; sys_platform == "win32"   # window control, autostart helpers
+pyautogui==0.9.54          # click/type actions (confirm-gated)
+requests==2.32.3
+soundfile==0.12.1

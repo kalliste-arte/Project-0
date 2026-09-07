@@ -1,0 +1,17 @@
+# Virtual environment - regenerate with: python -m venv venv
+venv/
+__pycache__/
+*.pyc
+
+# Voice model files - too large for git, download separately (see setup/VOICE_SETUP.md)
+voices/*.onnx
+voices/*.onnx.json
+
+# Never commit secrets
+.env
+*.key
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/

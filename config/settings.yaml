@@ -1,0 +1,81 @@
+# === Aya configuration ===
+# Everything here is editable any time. No code changes needed to
+# change what she can see, touch, or how she behaves.
+
+assistant:
+  name: "Aya"
+  wake_word: "aya"          # what you say to trigger her
+  language: "en"
+  # "voice" = mic + wake word (needs a working microphone)
+  # "text"  = type commands in the terminal instead, she still replies out loud
+  # Switch back to "voice" once you've got a mic/headset.
+  input_mode: "text"
+
+voice:
+  engine: "piper"           # local, offline TTS
+  voice_model: "en_US-amy-medium"   # a natural-sounding female Piper voice
+                             # swap for any Piper voice you like, see setup/VOICE_SETUP.md
+  speaking_rate: 1.0
+
+personality:
+  # 0.0 = strictly formal/professional, 1.0 = playful/casual banter
+  warmth_dial: 0.6
+  # Aya reacts to context (stress, good news, urgency) with matching tone.
+  # No romantic/flirtatious mode exists - this is intentionally not a setting.
+  expressive_emotion: true
+
+behavior:
+  confirm_before_acting: true   # she NEVER executes an action without you saying yes first
+  ask_when_ambiguous: true      # "check on what - disk, CPU, network?" instead of guessing
+  hold_context_seconds: 20      # how long she keeps context after a wake so you don't
+                                 # have to repeat "Aya" for a quick follow-up
+
+# ------------------------------------------------------------------
+# SCREEN AWARENESS: what Aya is allowed to SEE
+# ------------------------------------------------------------------
+screen_access:
+  enabled: true              # master on/off toggle - flip to false to pause her instantly
+  capture_interval_seconds: 3
+  # Anything matching these (process name, window title substring, or category)
+  # is NEVER captured, screenshotted, or read - not even in memory briefly.
+  exclude:
+    apps:
+      - "1password.exe"
+      - "bitwarden.exe"
+      - "keepass.exe"
+    window_title_contains:
+      - "bank"
+      - "password"
+      - "login"
+    categories:
+      - "banking"
+
+# ------------------------------------------------------------------
+# ACTION ACCESS: what Aya is allowed to ACT ON (open/click/type/run)
+# ------------------------------------------------------------------
+action_access:
+  mode: "full"                # "full" | "restricted" - flip to restricted any time
+  # Only used when mode is "restricted". Add app/category names to block her
+  # from acting on them (she can still be told to leave them alone even in full mode).
+  blocked:
+    apps: []
+    categories: []
+
+# ------------------------------------------------------------------
+# Reusable groups so you can block a whole category in one line
+# instead of listing every app individually.
+# ------------------------------------------------------------------
+categories:
+  social:
+    - "discord.exe"
+    - "whatsapp.exe"
+    - "instagram"
+    - "telegram.exe"
+    - "chrome.exe|instagram.com"
+    - "chrome.exe|whatsapp.com"
+  banking:
+    - "chrome.exe|bank"
+    - "mobile banking.exe"
+
+startup:
+  launch_on_boot: true
